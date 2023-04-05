@@ -21,7 +21,7 @@ export default function App() {
     return (
         <MDBNavbar expand='lg' light bgColor='light'>
             <MDBContainer fluid>
-                <MDBNavbarBrand href='#'>Trip Planner</MDBNavbarBrand>
+                <MDBNavbarBrand href='\'>Trip Planner</MDBNavbarBrand>
 
                 <MDBNavbarToggler
                     aria-controls='navbarSupportedContent'
@@ -34,11 +34,6 @@ export default function App() {
 
                 <MDBCollapse navbar show={showBasic}>
                     <MDBNavbarNav className='mr-auto mb-2 mb-lg-0'>
-                        <MDBNavbarItem>
-                            <MDBNavbarLink active aria-current='page' href='#'>
-                                Home
-                            </MDBNavbarLink>
-                        </MDBNavbarItem>
                         <MDBNavbarItem>
                             <MDBNavbarLink href='#'>Login</MDBNavbarLink>
                         </MDBNavbarItem>
