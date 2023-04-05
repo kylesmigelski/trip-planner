@@ -87,6 +87,11 @@ label {
   color:white
 }
 
+.blurb{
+  justify-content: center;
+  padding-top: 20px;
+}
+
 .button-row {
   display:flex;
   justify-content: left;
