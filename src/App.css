@@ -27,6 +27,14 @@
   font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
 }
 
+.title-text{
+  font-size: 50px;
+  font-weight: 900;
+  text-shadow: -1px 1px 0 #cb4c4c;
+  color:black;
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+}
+
 .App-text{
     min-height: 100vh;
     margin-left: 300px;
@@ -95,7 +103,6 @@ label {
 .button-row {
   display:flex;
   justify-content: left;
-  align-items: left;
 }
 
 .App-link {

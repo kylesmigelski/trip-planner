@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
-import { QuizQuestion, questions} from '../components/Quiz/questions';
-import { Destination, SubLocation, destinations, calculateTripRecommendation } from '../components/Quiz/destinations';
-import {MDBBtn, MDBCol, MDBContainer, MDBRow} from "mdb-react-ui-kit";
+import {QuizQuestion, questions} from '../components/Quiz/questions';
+import {Destination, SubLocation, destinations, calculateTripRecommendation} from '../components/Quiz/destinations';
+import {MDBBtn, MDBCard, MDBCol, MDBContainer, MDBRow} from "mdb-react-ui-kit";
 
 const Quiz: React.FC = () => {
     const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -18,7 +18,7 @@ const Quiz: React.FC = () => {
     };
 
     useEffect(() => {
-        if (preferences.length === questions.length ) {
+        if (preferences.length === questions.length) {
             setIsQuizComplete(true);
             const bestTrips = calculateTripRecommendation(preferences);
             setRecommendedTrips(bestTrips);
@@ -28,18 +28,30 @@ const Quiz: React.FC = () => {
 
 
     return (
-        <MDBContainer>
-            <MDBRow className="justify-content-center mt-5">
-                <MDBCol md="6">
-                    <h1 className="text-center mb-4">Trip Preference Quiz</h1>
+        <div
+            className="bg-image d-flex justify-content-center align-items-center"
+            style={{
+                backgroundImage: `url("https://images.wallpaperscraft.com/image/single/sky_gradient_clouds_170369_3840x2160.jpg")`,
+                height: '100vh',
+            }}
+        >
+
+
+
+            <MDBContainer className="d-flex mt-5 justify-content-center" style={{ minHeight: '100vh' }}>
+                <MDBCard className="p-5 d-flex mt-5" style={{width: '1000px', height: '400px'}}>
+                    <h1 className="text-center mb-4 title-text">Trip Preference Quiz</h1>
                     {!isQuizComplete ? (
                         <>
-                            <p className="text-center">{questions[currentQuestion].text}</p>
-                            <div className="d-flex justify-content-around mt-4">
+                            <h4 className="text-center m-4">{questions[currentQuestion].text}</h4>
+                            <div className="d-flex justify-content-around mt-4 position-absolute"
+                                 style={{bottom: '80px', left: '50%', transform: 'translateX(-50%)'}}>
                                 {questions[currentQuestion].answers.map((answer) => (
                                     <MDBBtn
                                         key={answer.id}
+                                        style={{ width: '200px' }}
                                         color="primary"
+                                        size="lg"
                                         onClick={() => handleAnswerClick(answer.value)}
                                     >
                                         {answer.text}
@@ -71,12 +83,12 @@ const Quiz: React.FC = () => {
                             )}
                         </div>
                     )}
-                </MDBCol>
-            </MDBRow>
-        </MDBContainer>
-
+                </MDBCard>
+            </MDBContainer>
+        </div>
     );
+
 };
 
 
-    export default Quiz;
+export default Quiz;

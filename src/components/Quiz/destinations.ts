@@ -45,6 +45,30 @@ export const destinations: Destination[] = [
             { id: 8, name: 'Theme Park', tags: ['beach', 'relax', 'hot', 'low_culture', 'rural', 'shopping_dining', 'luxury'] },
         ],
     },
+    {
+        id: 5,
+        name: 'California',
+        subLocations: [
+            { id: 9, name: 'Malibu', tags: ['beach', 'relax', 'hot', 'low_culture', 'rural', 'shopping_dining', 'luxury'] },
+            { id: 10, name: 'Yosemite', tags: ['mountains', 'active', 'cool', 'low_culture', 'rural', 'outdoor', 'budget'] },
+        ],
+    },
+    {
+        id: 6,
+        name: 'Michigan',
+        subLocations: [
+            { id: 11, name: 'Wine Tasting', tags: ['urban', 'relax', 'mild', 'low_culture', 'rural', 'shopping_dining', 'midrange'] },
+            { id: 12, name: 'Fishing', tags: ['beach', 'relax', 'mild', 'low_culture', 'rural', 'outdoor', 'budget'] },
+        ],
+    },
+    {
+        id: 7,
+        name: 'Canada',
+        subLocations: [
+            { id: 13, name: 'Niagara Falls', tags: ['beach', 'relax', 'mild', 'low_culture', 'rural', 'outdoor', 'budget'] },
+            { id: 14, name: 'Banff', tags: ['mountains', 'active', 'cool', 'low_culture', 'rural', 'outdoor', 'luxury'] },
+        ],
+    },
 ];
 
 
