@@ -6,6 +6,9 @@
   height: 40vmin;
   pointer-events: none;
 }
+body {
+  overflow-y: auto;
+}
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
@@ -14,24 +17,20 @@
 }
 
 .App-header {
-  display: flex;
-  flex-direction: column;
-  margin-left: 50px;
-  padding-top:100px;
-  justify-content: left;
-  font-size: 100px;
   font-weight: 900;
+  font-size: 6vw;
   text-shadow: -5px 4px 0 #cb4c4c;
   color:white;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
 }
-.bg{
-
+.logo {
+ margin-top: 230px;
 }
 .title-text{
+  margin-bottom: 5px;
   font-size: 80px;
   font-weight: 900;
-    text-shadow: -5px 4px 0 #cb4c4c;
+  text-shadow: -5px 4px 0 #cb4c4c;
   color:white;
   font-family:'Fredoka', sans-serif
 }

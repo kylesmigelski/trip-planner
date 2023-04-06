@@ -21,7 +21,8 @@ export default function App() {
     return (
         <MDBNavbar expand='lg' dark bgColor='dark'>
             <MDBContainer fluid>
-                <MDBNavbarBrand href='\'>Trip Planner</MDBNavbarBrand>
+                <MDBNavbarBrand style={{ fontFamily: 'Gill sans', textShadow: '-1px 1px 0 #cb4c4c',
+                    fontWeight: '900'}} href='\'>Trip Planner</MDBNavbarBrand>
 
                 <MDBNavbarToggler
                     aria-controls='navbarSupportedContent'
