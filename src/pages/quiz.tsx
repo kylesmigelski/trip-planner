@@ -32,14 +32,17 @@ const Quiz: React.FC = () => {
         <div
             className="bg-image d-flex justify-content-center align-items-center "
             style={{
-                backgroundImage: `url("https://images.wallpaperscraft.com/image/single/mountains_sky_gradient_132512_2560x1440.jpg")`,
-                height: '100vh',
+                backgroundImage: `url("https://mir-s3-cdn-cf.behance.net/project_modules/2800_opt_1/174af6150954961.63051cbad9543.jpg")`,
+                minHeight: '100vh',
+                backgroundSize: 'cover',
+                backgroundPosition: 'center center',
+                overflowY: 'auto',
             }}
         >
             <MDBContainer className="d-flex mt-5 align-content-center flex-column" style={{ minHeight: '100vh' }}>
                 <div className="d-flex flex-column align-items-center">
                 <h1 className="text-center mt-3 title-text">Trip Preference Quiz</h1>
-                <MDBCard className="p-3 d-flex mt-5" style={{backgroundColor: 'rgba(255, 255, 255, 0.85)', width: '1200px', height: '650px'}}>
+                <MDBCard className="p-3 d-flex mt-5" style={{backgroundColor: 'rgba(255, 255, 255, 0.95)', width: '1200px', height: '650px'}}>
                     {!isQuizComplete ? (
                         <>
                             <div className="p-1 shadow" style={{backgroundColor: 'rgba(255, 255, 255, 0.85)'}}>
