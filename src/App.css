@@ -35,6 +35,39 @@
   font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
 }
 
+.question-btn {
+  transition: transform 0.3s ease, font-size 0.3s ease;
+  font-size: 24px;
+  position: relative;
+  overflow: hidden;
+  background-size: cover;
+}
+
+.question-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  transition: background-color 0.3s ease;
+}
+
+.question-btn:hover {
+  transform: scale(1.05); /* Increase the size of the button on hover */
+  font-size: 27px; /* Increase the font size on hover */
+}
+
+.question-btn:hover::before {
+  background-color: rgba(0, 0, 0, 0.6); /* Dim the background on hover */
+}
+.btn-text {
+  position: relative;
+  text-shadow: -2px 2px 2px black;
+  z-index: 1;
+}
+
 .App-text{
     min-height: 100vh;
     margin-left: 300px;

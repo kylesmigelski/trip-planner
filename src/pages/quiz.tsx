@@ -35,29 +35,41 @@ const Quiz: React.FC = () => {
                 height: '100vh',
             }}
         >
-
-
-
             <MDBContainer className="d-flex mt-5 justify-content-center" style={{ minHeight: '100vh' }}>
-                <MDBCard className="p-5 d-flex mt-5" style={{width: '1000px', height: '400px'}}>
+                <MDBCard className="p-5 d-flex mt-5" style={{width: '1200px', height: '800px'}}>
                     <h1 className="text-center mb-4 title-text">Trip Preference Quiz</h1>
                     {!isQuizComplete ? (
                         <>
                             <h4 className="text-center m-4">{questions[currentQuestion].text}</h4>
-                            <div className="d-flex justify-content-around mt-4 position-absolute"
-                                 style={{bottom: '80px', left: '50%', transform: 'translateX(-50%)'}}>
-                                {questions[currentQuestion].answers.map((answer) => (
-                                    <MDBBtn
-                                        key={answer.id}
-                                        style={{ width: '200px' }}
-                                        color="primary"
-                                        size="lg"
-                                        onClick={() => handleAnswerClick(answer.value)}
-                                    >
-                                        {answer.text}
-                                    </MDBBtn>
-                                ))}
+                            <div
+                                className="d-flex justify-content-around mt-4 position-absolute"
+                                style={{ bottom: '80px', left: '50%', transform: 'translateX(-50%)' }}
+                            >
+                                <MDBRow>
+                                    {questions[currentQuestion].answers.map((answer, index) => (
+                                        <React.Fragment key={answer.id}>
+                                            <MDBCol sm="6" className="d-flex justify-content-center mb-4">
+                                                <MDBBtn
+                                                    style={{
+
+                                                        width: '400px',
+                                                        height: '200px',
+                                                        backgroundImage: `url(${answer.image})`,
+                                                    }}
+                                                    className="question-btn"
+                                                    color="primary"
+                                                    size="lg"
+                                                    onClick={() => handleAnswerClick(answer.value)}
+                                                >
+                                                    <span className="btn-text">{answer.text}</span>
+                                                </MDBBtn>
+                                            </MDBCol>
+                                            {index % 2 === 1 && <MDBCol sm="12"></MDBCol>}
+                                        </React.Fragment>
+                                    ))}
+                                </MDBRow>
                             </div>
+
                         </>
                     ) : (
                         <div className="text-center">
