@@ -1,7 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@600&family=Unbounded:wght@600&display=swap');
 .App {
   text-align: center;
 }
-
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -14,7 +14,6 @@
 }
 
 .App-header {
-  
   display: flex;
   flex-direction: column;
   margin-left: 50px;
@@ -24,20 +23,22 @@
   font-weight: 900;
   text-shadow: -5px 4px 0 #cb4c4c;
   color:white;
-  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
 }
+.bg{
 
+}
 .title-text{
-  font-size: 50px;
+  font-size: 80px;
   font-weight: 900;
-  text-shadow: -1px 1px 0 #cb4c4c;
-  color:black;
-  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+    text-shadow: -5px 4px 0 #cb4c4c;
+  color:white;
+  font-family:'Fredoka', sans-serif
 }
 
 .question-btn {
   transition: transform 0.3s ease, font-size 0.3s ease;
-  font-size: 24px;
+  font-size: 22px;
   position: relative;
   overflow: hidden;
   background-size: cover;
@@ -56,7 +57,7 @@
 
 .question-btn:hover {
   transform: scale(1.05); /* Increase the size of the button on hover */
-  font-size: 27px; /* Increase the font size on hover */
+  font-size: 23px; /* Increase the font size on hover */
 }
 
 .question-btn:hover::before {

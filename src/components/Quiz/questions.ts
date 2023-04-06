@@ -25,6 +25,7 @@ export const questions: QuizQuestion[] = [
         answers: [
             { id: 1, text: 'Relax', value: 'relax', image: 'https://www.tropicalhangout.shop/wp-content/uploads/2020/06/Tropical-Hangout-0919-42-scaled.jpg'},
             { id: 2, text: 'Be active', value: 'active', image: 'https://wildlandtrekking.com/content/uploads/2020/12/northcascades-1200x901.jpg' },
+            { id: 3, text: 'Learn something new', value: 'learn', image: 'https://imageio.forbes.com/specials-images/imageserve/1071462356/0x0.jpg?format=jpg&width=1200'}
         ],
     },
     {

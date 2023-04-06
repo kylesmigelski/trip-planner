@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from 'react';
+import bg from '../assets/grainbg.jpg';
 import {QuizQuestion, questions} from '../components/Quiz/questions';
 import {Destination, SubLocation, destinations, calculateTripRecommendation} from '../components/Quiz/destinations';
-import {MDBBtn, MDBCard, MDBCol, MDBContainer, MDBRow} from "mdb-react-ui-kit";
+import {MDBBtn, MDBCard, MDBCardImage, MDBCol, MDBContainer, MDBRow} from "mdb-react-ui-kit";
 
 const Quiz: React.FC = () => {
     const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -29,21 +30,24 @@ const Quiz: React.FC = () => {
 
     return (
         <div
-            className="bg-image d-flex justify-content-center align-items-center"
+            className="bg-image d-flex justify-content-center align-items-center "
             style={{
-                backgroundImage: `url("https://images.wallpaperscraft.com/image/single/sky_gradient_clouds_170369_3840x2160.jpg")`,
+                backgroundImage: `url("https://images.wallpaperscraft.com/image/single/mountains_sky_gradient_132512_2560x1440.jpg")`,
                 height: '100vh',
             }}
         >
-            <MDBContainer className="d-flex mt-5 justify-content-center" style={{ minHeight: '100vh' }}>
-                <MDBCard className="p-5 d-flex mt-5" style={{width: '1200px', height: '800px'}}>
-                    <h1 className="text-center mb-4 title-text">Trip Preference Quiz</h1>
+            <MDBContainer className="d-flex mt-5 align-content-center flex-column" style={{ minHeight: '100vh' }}>
+                <div className="d-flex flex-column align-items-center">
+                <h1 className="text-center mt-3 title-text">Trip Preference Quiz</h1>
+                <MDBCard className="p-3 d-flex mt-5" style={{backgroundColor: 'rgba(255, 255, 255, 0.85)', width: '1200px', height: '650px'}}>
                     {!isQuizComplete ? (
                         <>
-                            <h4 className="text-center m-4">{questions[currentQuestion].text}</h4>
+                            <div className="p-1 shadow" style={{backgroundColor: 'rgba(255, 255, 255, 0.85)'}}>
+                                <h1 className="text-center m-3" style={{ fontFamily:'Gill Sans'}}>{questions[currentQuestion].text}</h1>
+                            </div>
                             <div
-                                className="d-flex justify-content-around mt-4 position-absolute"
-                                style={{ bottom: '80px', left: '50%', transform: 'translateX(-50%)' }}
+                                className="d-flex justify-content-around position-absolute"
+                                style={{ bottom: '70px', left: '50%', transform: 'translateX(-50%)' }}
                             >
                                 <MDBRow>
                                     {questions[currentQuestion].answers.map((answer, index) => (
@@ -69,7 +73,6 @@ const Quiz: React.FC = () => {
                                     ))}
                                 </MDBRow>
                             </div>
-
                         </>
                     ) : (
                         <div className="text-center">
@@ -96,6 +99,7 @@ const Quiz: React.FC = () => {
                         </div>
                     )}
                 </MDBCard>
+                </div>
             </MDBContainer>
         </div>
     );

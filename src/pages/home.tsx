@@ -13,7 +13,7 @@ export default function Home() {
                 <div className='d-flex justify-content-center h-100'>
                     <div className='text-white'>
                         <h1 className='App-header'>Welcome to Trip Planner!</h1>
-                        <h4 className='mb-14' style={{ fontFamily: 'Gill Sans' }}>Lets plan your dream vacation.</h4>
+                        <h4 className='mb-14' >Lets plan your dream vacation.</h4>
                         <MDBBtn href='/quiz' className='big-button' color={'secondary'} size={'lg'}>
                             Get started
                         </MDBBtn>

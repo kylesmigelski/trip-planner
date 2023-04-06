@@ -19,7 +19,7 @@ export default function App() {
     const [showBasic, setShowBasic] = useState(false);
 
     return (
-        <MDBNavbar expand='lg' light bgColor='light'>
+        <MDBNavbar expand='lg' dark bgColor='dark'>
             <MDBContainer fluid>
                 <MDBNavbarBrand href='\'>Trip Planner</MDBNavbarBrand>
 
