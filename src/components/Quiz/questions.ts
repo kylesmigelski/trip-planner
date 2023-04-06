@@ -15,6 +15,7 @@ export const questions: QuizQuestion[] = [
         answers: [
             { id: 1, text: 'Mountains', value: 'mountains' },
             { id: 2, text: 'Beach', value: 'beach' },
+            { id: 3, text: 'Urban', value: 'urban'}
         ],
     },
     {
@@ -45,14 +46,6 @@ export const questions: QuizQuestion[] = [
     },
     {
         id: 5,
-        text: 'Do you prefer urban or rural settings?',
-        answers: [
-            { id: 1, text: 'Urban', value: 'urban' },
-            { id: 2, text: 'Rural', value: 'rural' },
-        ],
-    },
-    {
-        id: 6,
         text: 'What type of activities do you enjoy?',
         answers: [
             { id: 1, text: 'Outdoor adventures', value: 'outdoor' },
@@ -62,7 +55,7 @@ export const questions: QuizQuestion[] = [
         ],
     },
     {
-        id: 7,
+        id: 6,
         text: 'What type of accommodation do you prefer?',
         answers: [
             { id: 1, text: 'Luxury hotel or resort', value: 'luxury' },

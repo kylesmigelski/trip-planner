@@ -69,6 +69,22 @@ export const destinations: Destination[] = [
             { id: 14, name: 'Banff', tags: ['mountains', 'active', 'cool', 'low_culture', 'rural', 'outdoor', 'luxury'] },
         ],
     },
+    {
+        id: 8,
+        name: 'Paris',
+        subLocations: [
+            { id: 15, name: 'Eiffel Tower', tags: ['urban', 'relax', 'mild', 'high_culture', 'shopping_dining', 'luxury'] },
+            { id: 16, name: 'Louvre', tags: ['urban', 'relax', 'mild', 'high_culture', 'shopping_dining', 'luxury'] },
+        ],
+    },
+    {
+        id: 9,
+        name: 'Italy',
+        subLocations: [
+            { id: 17, name: 'Rome', tags: ['urban', 'relax', 'mild', 'high_culture', 'shopping_dining', 'luxury'] },
+            { id: 18, name: 'Venice', tags: ['urban', 'relax', 'mild', 'high_culture', 'shopping_dining', 'luxury'] },
+        ],
+    },
 ];
 
 
