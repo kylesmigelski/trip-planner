@@ -14,13 +14,14 @@ import {
     MDBDropdownItem,
     MDBCollapse,
 } from 'mdb-react-ui-kit';
+import {signedIn,yourEmail} from '../pages/login.tsx'
 
 export default function App() {
     const [showBasic, setShowBasic] = useState(false);
-
+    
     return (
         <MDBNavbar expand='lg' dark bgColor='dark'>
-            <MDBContainer fluid>
+            <MDBContainer fluid id="contain">
                 <MDBNavbarBrand style={{ fontFamily: 'Gill sans', textShadow: '-1px 1px 0 #cb4c4c',
                     fontWeight: '900'}} href='\'>Trip Planner</MDBNavbarBrand>
 

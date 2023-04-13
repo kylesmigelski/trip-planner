@@ -1,4 +1,4 @@
-import React, {useState,useRef} from "react";
+import React, {useState,useRef, ChangeEvent} from "react";
 import '../App.css';
 import { useNavigate } from 'react-router-dom';
 import { MDBBtn, MDBCard, MDBCardBody, MDBCol, MDBContainer, MDBIcon, MDBInput, MDBRow } from "mdb-react-ui-kit";
@@ -11,31 +11,38 @@ import app from "../firebase.js"
 
 export default function Signup() {
     const myNav = useNavigate();
-    const inputRef = useRef(null);
 
+    const [newEmail, setNewEmail] = useState("");
+    const [newPassword, setNewPassword] = useState("");
 
     const auth = getAuth(app);
 
-    function goHome(){
-        myNav("/");
+    function updateEmail(ev: ChangeEvent<HTMLInputElement>){
+        setNewEmail(ev.target.value)
+    }
+
+    function updatePassword(ev: ChangeEvent<HTMLInputElement>){
+        setNewPassword(ev.target.value)
     }
 
     function createAccount() {
-        //Add account to firebase
-        //const [newEmail, setUpdated] = useState('Email address');
-        //const newPassword = ""
+        if (newPassword.length < 6) {
+            alert("Your password must be at least 6 characters.")
+        }
+        else {
+            createUserWithEmailAndPassword(auth, newEmail, newPassword)
+                .then((cred: UserCredential) => {
+                    console.log("Account created");
 
-        //createUserWithEmailAndPassword(auth, newEmail, newPassword)
-            //.then((cred:UserCredential)=>{
-           // console.log("Account created");
+                    auth.signOut()
+                        .catch((err: any) => {
+                            console.error("Oops", err);
+                        });
+                })
 
-            //auth.signOut()
-           // .catch((err: any) => {
-           // console.error("Oops", err);});
-           // })
-
-        //Send user to login page
-        goToLogin()
+            //Send user to login page
+            goToLogin()
+        }
         
     }
 
@@ -64,8 +71,8 @@ return (
                                 <h2 className="fw-bold mb-2 text-uppercase">Create your account</h2><br></br>
                                 <p className="text-white-50 mb-5">Please choose an email and password:</p>
 
-                                <MDBInput wrapperClass='mb-4 mx-5 w-100' labelClass='text-white' label='Email address' id='formControlLg' type='email' size="lg"/>
-                            <MDBInput wrapperClass='mb-4 mx-5 w-100' labelClass='text-white' label='Password' id='formControlLg' type='password' size="lg" />
+                            <MDBInput wrapperClass='mb-4 mx-5 w-100' labelClass='text-white' label='Email address' id='formControlLg' type='email' size="lg" onChange={updateEmail} value={newEmail} />
+                            <MDBInput wrapperClass='mb-4 mx-5 w-100' labelClass='text-white' label='Password' id='formControlLg' type='password' size="lg" onChange={updatePassword} value = {newPassword}/>
                             
                                 <MDBBtn outline className='mx-2 px-5' color='white' size='lg' onClick={createAccount}>
                                     Create Account

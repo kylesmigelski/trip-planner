@@ -1,20 +1,49 @@
-import React from "react";
+import React, {useState,useRef, ChangeEvent} from "react";
 import '../App.css';
 import { useNavigate } from 'react-router-dom';
-import {MDBBtn, MDBCard, MDBCardBody, MDBCol, MDBContainer, MDBIcon, MDBInput, MDBRow} from "mdb-react-ui-kit";
+import { MDBBtn, MDBCard, MDBCardBody, MDBCol, MDBContainer, MDBIcon, MDBInput, MDBRow } from "mdb-react-ui-kit";
+import { getAuth,signInWithPopup, signInWithEmailAndPassword, UserCredential, GoogleAuthProvider } from '@firebase/auth';
+import app from "../firebase.js"
+export let signedIn = false;
+export let yourEmail = "";
 
 
 export default function Login() {
     const myNav = useNavigate();
 
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+    function updateEmail(event: ChangeEvent<HTMLInputElement>): void{
+        setEmail(event.target.value)
+    }
+
+    function updatePassword(ev: ChangeEvent<HTMLInputElement>){
+        setPassword(ev.target.value)
+    }
+
+    yourEmail = email;
+
     function goHome(){
         myNav("/");
     }
 
-    function signIn() {
-        
-    }
+    const auth = getAuth(app);
 
+    function signIn() {
+         signInWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                // Signed in 
+                const user = userCredential.user;
+                console.log("Signed in.");
+                signedIn = true;
+                goHome();
+            })
+            .catch((error) => {
+                console.log("Error while signing in.");
+            });
+    }
+        
 
     return (
         <div
@@ -35,11 +64,11 @@ export default function Login() {
                                 <h2 className="fw-bold mb-2 text-uppercase">Login</h2>
                                 <p className="text-white-50 mb-5">Please enter your login and password!</p>
 
-                                <MDBInput wrapperClass='mb-4 mx-5 w-100' labelClass='text-white' label='Email address' id='formControlLg' type='email' size="lg"/>
-                                <MDBInput wrapperClass='mb-4 mx-5 w-100' labelClass='text-white' label='Password' id='formControlLg' type='password' size="lg"/>
+                                <MDBInput wrapperClass='mb-4 mx-5 w-100' labelClass='text-white' label='Email address' id='formControlLg' type='email' size="lg" onChange={updateEmail} value={email}/>
+                                <MDBInput wrapperClass='mb-4 mx-5 w-100' labelClass='text-white' label='Password' id='formControlLg' type='password' size="lg" onChange={updatePassword} value={password}/>
 
                                 <p className="small mb-3 pb-lg-2"><a className="text-white-50" href="#!">Forgot password?</a></p>
-                                <MDBBtn outline className='mx-2 px-5' color='white' size='lg'>
+                                <MDBBtn outline className='mx-2 px-5' color='white' size='lg' onClick={signIn}>
                                     Login
                                 </MDBBtn>
                                 <div className='d-flex flex-row mt-3 mb-5'></div>
