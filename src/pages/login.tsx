@@ -44,7 +44,7 @@ export default function Login() {
                                 </MDBBtn>
                                 <div className='d-flex flex-row mt-3 mb-5'></div>
                                 <div>
-                                    <p className="mb-0">Don't have an account? <a href="#!" className="text-white-50 fw-bold">Sign Up</a></p>
+                                    <p className="mb-0">Don't have an account? <a href="/signup" className="text-white-50 fw-bold">Sign Up</a></p>
                                 </div>
                             </MDBCardBody>
                         </MDBCard>
