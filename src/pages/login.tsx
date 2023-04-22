@@ -1,12 +1,9 @@
-import React, {useState,useRef, ChangeEvent} from "react";
+import React, {useState, ChangeEvent} from "react";
 import '../App.css';
 import { useNavigate } from 'react-router-dom';
 import { MDBBtn, MDBCard, MDBCardBody, MDBCol, MDBContainer, MDBIcon, MDBInput, MDBRow } from "mdb-react-ui-kit";
-import { getAuth,signInWithPopup, signInWithEmailAndPassword, UserCredential, GoogleAuthProvider } from '@firebase/auth';
+import { getAuth, signInWithEmailAndPassword, UserCredential } from '@firebase/auth';
 import app from "../firebase.js"
-export let signedIn = false;
-export let yourEmail = "";
-
 
 export default function Login() {
     const myNav = useNavigate();
@@ -22,8 +19,6 @@ export default function Login() {
         setPassword(ev.target.value)
     }
 
-    yourEmail = email;
-
     function goHome(){
         myNav("/");
     }
@@ -31,12 +26,11 @@ export default function Login() {
     const auth = getAuth(app);
 
     function signIn() {
-         signInWithEmailAndPassword(auth, email, password)
+        signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
-                // Signed in 
+                // Signed in
                 const user = userCredential.user;
                 console.log("Signed in.");
-                signedIn = true;
                 goHome();
             })
             .catch((error) => {

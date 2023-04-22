@@ -14,16 +14,17 @@ import {
     MDBDropdownItem,
     MDBCollapse,
 } from 'mdb-react-ui-kit';
-import {signedIn,yourEmail} from '../pages/login.tsx'
+import { useAuth } from '../AuthContext';
 
 export default function App() {
     const [showBasic, setShowBasic] = useState(false);
-    
+    const { currentUser } = useAuth();
+
     return (
         <MDBNavbar expand='lg' dark bgColor='dark'>
             <MDBContainer fluid id="contain">
                 <MDBNavbarBrand style={{ fontFamily: 'Gill sans', textShadow: '-1px 1px 0 #cb4c4c',
-                    fontWeight: '900'}} href='\'>Trip Planner</MDBNavbarBrand>
+                    fontWeight: '900'}} href='/'>Trip Planner</MDBNavbarBrand>
 
                 <MDBNavbarToggler
                     aria-controls='navbarSupportedContent'
@@ -37,21 +38,21 @@ export default function App() {
                 <MDBCollapse navbar show={showBasic}>
                     <MDBNavbarNav className='mr-auto mb-2 mb-lg-0'>
                         <MDBNavbarItem>
-                            <MDBNavbarLink href='\login'>Login/Signup</MDBNavbarLink>
+                            <MDBNavbarLink href='/login'>Login/Signup</MDBNavbarLink>
                         </MDBNavbarItem>
 
-                        <MDBNavbarItem>
-                            <MDBDropdown>
-                                <MDBDropdownToggle tag='a' className='nav-link' role='button'>
-                                    My Trips
-                                </MDBDropdownToggle>
-                                <MDBDropdownMenu>
-                                    <MDBDropdownItem link>Action</MDBDropdownItem>
-                                    <MDBDropdownItem link>Another action</MDBDropdownItem>
-                                    <MDBDropdownItem link>Something else here</MDBDropdownItem>
-                                </MDBDropdownMenu>
-                            </MDBDropdown>
-                        </MDBNavbarItem>
+                        {currentUser && (
+                            <MDBNavbarItem>
+                                <MDBDropdown>
+                                    <MDBDropdownToggle tag='a' className='nav-link' role='button'>
+                                        {currentUser.displayName ? `${currentUser.displayName}'s Account` : "My Account"}
+                                    </MDBDropdownToggle>
+                                    <MDBDropdownMenu>
+                                        <MDBDropdownItem link href='/trips'>Trips</MDBDropdownItem>
+                                    </MDBDropdownMenu>
+                                </MDBDropdown>
+                            </MDBNavbarItem>
+                        )}
                     </MDBNavbarNav>
                 </MDBCollapse>
             </MDBContainer>

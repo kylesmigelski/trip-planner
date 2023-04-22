@@ -1,14 +1,22 @@
 import React, {useEffect, useState} from 'react';
-import bg from '../assets/grainbg.jpg';
-import {QuizQuestion, questions} from '../components/Quiz/questions';
-import {Destination, SubLocation, destinations, calculateTripRecommendation} from '../components/Quiz/destinations';
-import {MDBBtn, MDBCard, MDBCardImage, MDBCol, MDBContainer, MDBRow} from "mdb-react-ui-kit";
+import { questions } from '../components/Quiz/questions';
+import { SubLocation, destinations, calculateTripRecommendation} from '../components/Quiz/destinations';
+import {MDBBtn, MDBCard, MDBCardBody, MDBCardImage, MDBCol, MDBContainer, MDBRow} from "mdb-react-ui-kit";
+import { useAuth } from "../AuthContext";
+import { collection, addDoc, getFirestore, query, where, getDocs } from "firebase/firestore";
+
 
 const Quiz: React.FC = () => {
     const [currentQuestion, setCurrentQuestion] = useState(0);
     const [preferences, setPreferences] = useState<string[]>([]);
     const [isQuizComplete, setIsQuizComplete] = useState(false);
     const [recommendedTrips, setRecommendedTrips] = useState<SubLocation[]>([]);
+    const { currentUser } = useAuth();
+    const [buttonClicked, setButtonClicked] = useState(false);
+
+    const handleButtonClick = (trip: SubLocation) => {
+        addTripToUser(trip).then(r => setButtonClicked(true));
+    };
 
     const handleAnswerClick = (value: string) => {
         setPreferences([...preferences, value]);
@@ -26,6 +34,33 @@ const Quiz: React.FC = () => {
             console.log(preferences)
         }
     }, [preferences]);
+
+    const addTripToUser = async (trip: SubLocation) => {
+        try {
+            const userTripsRef = collection(getFirestore(), "userTrips");
+            // @ts-ignore
+            const q = query(userTripsRef, where("userId", "==", currentUser.uid), where("tripId", "==", trip.id));
+            const querySnapshot = await getDocs(q);
+
+            if (querySnapshot.empty) {
+                // @ts-ignore
+                await addDoc(userTripsRef, {
+                    userId: currentUser.uid,
+                    tripId: trip.id,
+                    tripName: trip.name,
+                    destinationName: destinations.find((destination) =>
+                        destination.subLocations.some((subLocation) => subLocation.id === trip.id)
+                    )?.name,
+                });
+                console.log("Trip added!");
+            } else {
+                console.log("Trip already added.");
+            }
+        } catch (error) {
+            console.error("Error adding trip: ", error);
+        }
+    };
+
 
 
     return (
@@ -81,25 +116,38 @@ const Quiz: React.FC = () => {
                         <div className="text-center">
                             {recommendedTrips.length > 0 && (
                                 <>
-                                    <h2>Recommended Trips</h2>
+                                    <h1>Recommended Trips</h1>
                                     <p>Here are your recommended trips based on your preferences and budget:</p>
-                                    <ul>
-                                        {recommendedTrips.map((trip) => (
-                                            <li key={trip.id}>
-                                                <strong>{trip.name}</strong> in{' '}
-                                                <strong>
-                                                    {
-                                                        destinations.find((destination) =>
-                                                            destination.subLocations.some((subLocation) => subLocation.id === trip.id)
-                                                        )?.name
-                                                    }
-                                                </strong>
-                                            </li>
+                                    <MDBRow className="mb-4">
+                                        {recommendedTrips.slice(0, 4).map((trip) => (
+                                            <MDBCol md="6" key={trip.id} className="mb-4">
+                                                <MDBCard style={{ width: "22rem" }}>
+                                                    <MDBCardImage
+                                                        alt={trip.name}
+                                                    />
+                                                    <MDBCardBody>
+                                                        <h4 className="card-title">{trip.name}</h4>
+                                                        <p className="card-text">
+                                                            {destinations.find((destination) =>
+                                                                destination.subLocations.some((subLocation) => subLocation.id === trip.id)
+                                                            )?.name}
+                                                        </p>
+                                                        <MDBBtn
+                                                            color={buttonClicked ? 'light' : 'primary'}
+                                                            onClick={() => handleButtonClick(trip)}
+                                                            disabled={buttonClicked}
+                                                        >
+                                                            {buttonClicked ? 'Added' : 'Add Trip'}
+                                                        </MDBBtn>
+                                                    </MDBCardBody>
+                                                </MDBCard>
+                                            </MDBCol>
                                         ))}
-                                    </ul>
+                                    </MDBRow>
                                 </>
                             )}
                         </div>
+
                     )}
                 </MDBCard>
                 </div>
