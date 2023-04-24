@@ -5,14 +5,14 @@ import { collection, getDocs, query, where, addDoc, setDoc, doc, deleteDoc} from
 import { getFirestore } from '@firebase/firestore';
 import { SubLocation } from '../components/Quiz/destinations';
 import { useNavigate } from 'react-router-dom';
-
-
+import RatingsChart from "../components/ratingschart";
 
 const Trips: React.FC = () => {
     const { currentUser } = useAuth();
     const [trips, setTrips] = useState<SubLocation[]>([]);
     const navigate = useNavigate();
     const [averageRatings, setAverageRatings] = useState<{ [key: number]: number }>({});
+    const [ratingsCounts, setRatingsCounts] = useState<{ [key: number]: number[] }>({});
 
     useEffect(() => {
         if (currentUser) {
@@ -35,6 +35,7 @@ const Trips: React.FC = () => {
                 rating: tripData.rating || null,
             });
             await getAverageRating(tripData.tripId);
+            await getRatingsCount(tripData.tripId);
         }
 
         setTrips(tripList);
@@ -112,6 +113,26 @@ const Trips: React.FC = () => {
         }
     };
 
+    const getRatingsCount = async (tripId: number) => {
+        const tripReviewsRef = collection(getFirestore(), 'tripReviews');
+        const q = query(tripReviewsRef, where('tripId', '==', tripId));
+        const querySnapshot = await getDocs(q);
+
+        let ratings: Array<{ rating: number; userId: string }> = [];
+
+        querySnapshot.forEach((doc) => {
+            ratings = doc.data().ratings;
+        });
+
+        const ratingsCount = [0, 0, 0, 0, 0];
+        ratings.forEach((rating) => {
+            ratingsCount[rating.rating - 1]++;
+        });
+        console.log(ratingsCount)
+
+        setRatingsCounts((prev) => ({ ...prev, [tripId]: ratingsCount }));
+    };
+
     const redirectToRegister = () => {
         navigate('/signup');
     };
@@ -159,6 +180,7 @@ const Trips: React.FC = () => {
                                             Delete
                                         </MDBBtn>
                                         <span>User Ratings: {averageRatings[trip.id]}</span>
+                                        <RatingsChart ratings={ratingsCounts[trip.id] || []} />
                                     </div>
                                 </MDBCardBody>
                             </MDBCard>

@@ -51,7 +51,7 @@ const Quiz: React.FC = () => {
             if (querySnapshot.empty) {
                 // @ts-ignore
                 await addDoc(userTripsRef, {
-                    userId: currentUser.uid,
+                    userId: currentUser?.uid,
                     tripId: trip.id,
                     tripName: trip.name,
                     destinationName: destinations.find((destination) =>
