@@ -13,12 +13,17 @@ const Trips: React.FC = () => {
     const navigate = useNavigate();
     const [averageRatings, setAverageRatings] = useState<{ [key: number]: number }>({});
     const [ratingsCounts, setRatingsCounts] = useState<{ [key: number]: number[] }>({});
+    const [showChart, setShowChart] = useState<{ [key: number]: boolean }>({});
 
     useEffect(() => {
         if (currentUser) {
             fetchTrips().then(r => console.log('Trips fetched!'));
         }
     }, [currentUser]);
+
+    const toggleChart = (tripId: number) => {
+        setShowChart((prev) => ({ ...prev, [tripId]: !prev[tripId] }));
+    };
 
     const fetchTrips = async () => {
         const userTripsRef = collection(getFirestore(), 'userTrips');
@@ -179,8 +184,13 @@ const Trips: React.FC = () => {
                                         <MDBBtn color="danger" onClick={() => deleteTrip(trip.id)}>
                                             Delete
                                         </MDBBtn>
+                                        <MDBBtn color="primary" onClick={() => toggleChart(trip.id)}>
+                                            {showChart[trip.id] ? 'Hide' : 'Show'} Chart
+                                        </MDBBtn>
                                         <span>User Ratings: {averageRatings[trip.id]}</span>
-                                        <RatingsChart ratings={ratingsCounts[trip.id] || []} />
+                                        {showChart[trip.id] && (
+                                            <RatingsChart ratings={ratingsCounts[trip.id] || []} />
+                                        )}
                                     </div>
                                 </MDBCardBody>
                             </MDBCard>
