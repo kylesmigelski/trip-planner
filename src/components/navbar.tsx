@@ -45,7 +45,7 @@ export default function App() {
                             <MDBNavbarItem>
                                 <MDBDropdown>
                                     <MDBDropdownToggle tag='a' className='nav-link' role='button'>
-                                        {currentUser.displayName ? `${currentUser.displayName}'s Account` : "My Account"}
+                                        {currentUser.email ? `${currentUser.email}'s Account` : "My Account"}
                                     </MDBDropdownToggle>
                                     <MDBDropdownMenu>
                                         <MDBDropdownItem link href='/trips'>Trips</MDBDropdownItem>
