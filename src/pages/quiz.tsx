@@ -12,11 +12,17 @@ const Quiz: React.FC = () => {
     const [isQuizComplete, setIsQuizComplete] = useState(false);
     const [recommendedTrips, setRecommendedTrips] = useState<SubLocation[]>([]);
     const { currentUser } = useAuth();
-    const [buttonClicked, setButtonClicked] = useState(false);
+    const [buttonClicked, setButtonClicked] = useState<boolean[]>([]);
 
-    const handleButtonClick = (trip: SubLocation) => {
-        addTripToUser(trip).then(r => setButtonClicked(true));
+
+    const handleButtonClick = (trip: SubLocation, index: number) => {
+        addTripToUser(trip).then(() => {
+            const newButtonClicked = [...buttonClicked];
+            newButtonClicked[index] = true;
+            setButtonClicked(newButtonClicked);
+        });
     };
+
 
     const handleAnswerClick = (value: string) => {
         setPreferences([...preferences, value]);
@@ -60,8 +66,6 @@ const Quiz: React.FC = () => {
             console.error("Error adding trip: ", error);
         }
     };
-
-
 
     return (
         <div
@@ -118,13 +122,14 @@ const Quiz: React.FC = () => {
                                 <>
                                     <h1>Recommended Trips</h1>
                                     <p>Here are your recommended trips based on your preferences and budget:</p>
-                                    <MDBRow className="mb-4">
-                                        {recommendedTrips.slice(0, 4).map((trip) => (
-                                            <MDBCol md="6" key={trip.id} className="mb-4">
+                                    <div
+                                        className="d-flex justify-content-around position-absolute"
+                                        style={{ bottom: '70px', left: '50%', transform: 'translateX(-50%)' }}
+                                    >
+                                        <MDBRow>
+                                        {recommendedTrips.slice(0, 4).map((trip, index) => (
+                                            <MDBCol sm="6" className="d-flex justify-content-center mb-4" key={trip.id}>
                                                 <MDBCard style={{ width: "22rem" }}>
-                                                    <MDBCardImage
-                                                        alt={trip.name}
-                                                    />
                                                     <MDBCardBody>
                                                         <h4 className="card-title">{trip.name}</h4>
                                                         <p className="card-text">
@@ -133,17 +138,19 @@ const Quiz: React.FC = () => {
                                                             )?.name}
                                                         </p>
                                                         <MDBBtn
-                                                            color={buttonClicked ? 'light' : 'primary'}
-                                                            onClick={() => handleButtonClick(trip)}
-                                                            disabled={buttonClicked}
+                                                            color={buttonClicked[index] ? 'light' : 'primary'}
+                                                            onClick={() => handleButtonClick(trip, index)}
+                                                            disabled={buttonClicked[index]}
                                                         >
-                                                            {buttonClicked ? 'Added' : 'Add Trip'}
+                                                            {buttonClicked[index] ? 'Added' : 'Add Trip'}
                                                         </MDBBtn>
+
                                                     </MDBCardBody>
                                                 </MDBCard>
                                             </MDBCol>
                                         ))}
                                     </MDBRow>
+                                    </div>
                                 </>
                             )}
                         </div>
