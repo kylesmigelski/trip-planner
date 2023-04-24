@@ -125,7 +125,7 @@ const Trips: React.FC = () => {
                  backgroundPosition: 'center center',
              }}>
         <MDBContainer>
-            <h1 className="text-center mt-3">Your Trips</h1>
+            <h1 className="text-center mt-3 mb-4 title-text">Your Saved Trips</h1>
             {!currentUser ? (
                 <div className="text-center">
                     <p>Please log in or register to see your trips.</p>
