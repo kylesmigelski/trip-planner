@@ -1,11 +1,8 @@
-import React, {useState,useRef, ChangeEvent} from "react";
+import React, {useState,ChangeEvent} from "react";
 import '../App.css';
 import { useNavigate } from 'react-router-dom';
-import { MDBBtn, MDBCard, MDBCardBody, MDBCol, MDBContainer, MDBIcon, MDBInput, MDBRow } from "mdb-react-ui-kit";
-import { initializeApp } from "@firebase/app";
-import {getFirestore, Firestore} from "@firebase/firestore";
-import { getAnalytics } from "@firebase/analytics";
-import { getAuth, signOut, createUserWithEmailAndPassword, UserCredential, sendEmailVerification } from 'firebase/auth';
+import { MDBBtn, MDBCard, MDBCardBody, MDBCol, MDBContainer, MDBInput, MDBRow } from "mdb-react-ui-kit";
+import { getAuth, createUserWithEmailAndPassword, UserCredential} from 'firebase/auth';
 import app from "../firebase.js"
 
 

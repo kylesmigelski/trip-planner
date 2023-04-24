@@ -37,9 +37,19 @@ export default function App() {
 
                 <MDBCollapse navbar show={showBasic}>
                     <MDBNavbarNav className='mr-auto mb-2 mb-lg-0'>
-                        <MDBNavbarItem>
-                            <MDBNavbarLink href='/login'>Login/Signup</MDBNavbarLink>
-                        </MDBNavbarItem>
+
+                        {!currentUser && (
+                            <MDBNavbarItem>
+                                <MDBNavbarLink href='/login'>Login/Signup</MDBNavbarLink>
+                            </MDBNavbarItem>
+                        )}
+
+                        {currentUser && (
+                            <MDBNavbarItem>
+                                <MDBNavbarLink href='/logout'>Logout</MDBNavbarLink>
+                            </MDBNavbarItem>
+                        )}
+
 
                         {currentUser && (
                             <MDBNavbarItem>

@@ -1,8 +1,8 @@
-import React, {useState, ChangeEvent} from "react";
+import {useState, ChangeEvent} from "react";
 import '../App.css';
 import { useNavigate } from 'react-router-dom';
-import { MDBBtn, MDBCard, MDBCardBody, MDBCol, MDBContainer, MDBIcon, MDBInput, MDBRow } from "mdb-react-ui-kit";
-import { getAuth, signInWithEmailAndPassword, UserCredential } from '@firebase/auth';
+import { MDBBtn, MDBCard, MDBCardBody, MDBCol, MDBContainer,MDBInput, MDBRow } from "mdb-react-ui-kit";
+import { getAuth, signInWithEmailAndPassword} from '@firebase/auth';
 import app from "../firebase.js"
 
 export default function Login() {
@@ -29,7 +29,6 @@ export default function Login() {
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 // Signed in
-                const user = userCredential.user;
                 console.log("Signed in.");
                 goHome();
             })
