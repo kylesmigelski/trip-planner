@@ -14,6 +14,7 @@ const Trips: React.FC = () => {
     const [averageRatings, setAverageRatings] = useState<{ [key: number]: number }>({});
     const [ratingsCounts, setRatingsCounts] = useState<{ [key: number]: number[] }>({});
     const [showChart, setShowChart] = useState<{ [key: number]: boolean }>({});
+    const [chartData, setChartData] = useState<{ [key: number]: number[] }>({});
 
     useEffect(() => {
         if (currentUser) {
@@ -21,8 +22,14 @@ const Trips: React.FC = () => {
         }
     }, [currentUser]);
 
-    const toggleChart = (tripId: number) => {
+    const toggleChart = async (tripId: number) => {
         setShowChart((prev) => ({ ...prev, [tripId]: !prev[tripId] }));
+        await fetchChartData(tripId);
+    };
+
+    const fetchChartData = async (tripId: number) => {
+        await getRatingsCount(tripId);
+        setChartData((prev) => ({ ...prev, [tripId]: ratingsCounts[tripId] }));
     };
 
     const fetchTrips = async () => {

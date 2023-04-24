@@ -35,10 +35,6 @@ export const options = {
         legend: {
             position: 'right' as const,
         },
-        title: {
-            display: true,
-            text: 'Chart.js Horizontal Bar Chart',
-        },
     },
 };
 
@@ -48,7 +44,7 @@ export const data = {
     labels,
     datasets: [
         {
-            label: 'Ratings Count',
+            label: 'Stars',
             data: [] as number[],
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
@@ -71,7 +67,11 @@ export const data = {
 
 const RatingsChart: React.FC<Props> = ({ ratings }) => {
     data.datasets[0].data = ratings;
-    return <Bar options={options} data={data} />;
+    return (
+        <div style={{ width: '600px', height: '400px' }}>
+            <Bar options={options} data={data} />
+        </div>
+    );
 };
 
 export default RatingsChart;
